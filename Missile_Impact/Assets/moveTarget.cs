@@ -24,17 +24,25 @@ public class moveTarget : MonoBehaviour
     {
         if (Input.GetKeyDown("left"))
         {
-            Lane--;
+            if (controller.isGrounded && Lane > -2f)
+            {
+                Lane--;
+            }
         }
         if (Input.GetKeyDown("right"))
         {
-            Lane++;
+            if (controller.isGrounded && Lane < 2f)
+            {
+                Lane++;
+            }
         }
-        if (Input.GetKeyDown("space"))
+        /*if (Input.GetKeyDown("space"))
         {
-
-            movedir.y = 10f;
-        }
+            if (controller.isGrounded)
+            {
+                movedir.y = 10f;
+            }
+        }*/
 
         movedir.z = Mathf.Clamp(movedir.z + (acceleratorZ * Time.deltaTime), 0, speedZ);
 
@@ -46,9 +54,9 @@ public class moveTarget : MonoBehaviour
         Vector3 globaldir = transform.TransformDirection(movedir);
         controller.Move(globaldir * Time.deltaTime);
 
-        if (controller.isGrounded)
-        {
-            movedir.y = 0;
-        }
+        //if (controller.isGrounded)
+        //{
+        //  movedir.y = 0;
+        //}
     }
 }
