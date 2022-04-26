@@ -4,28 +4,18 @@ using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
 {
-    //Vector3型を変数vectorで宣言します。
-    Vector3 vector;
 
-    //GameObject型を変数Targetで宣言します。
     public GameObject target;
-
-    //float型を変数followSpeedで宣言します。
-    public float followSpeed;
+    private Vector3 distance;
 
     void Start()
     {
-        //位置をTargetの位置を元に設定するよ。
-        vector = target.transform.position - transform.position;
+        distance = transform.position - target.transform.position;
     }
 
-
-    void Update()
+    void LateUpdate()
     {
-        //位置を取得してスピードも合わせていくよ。
-        transform.position = Vector3.Lerp(
-            transform.position,
-            target.transform.position - vector,
-            Time.deltaTime * followSpeed);
+        transform.position = target.transform.position + distance;
     }
 }
+
