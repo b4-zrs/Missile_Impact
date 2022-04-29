@@ -328,7 +328,7 @@ MonoBehaviour:
   white: 2
   adaptionSpeed: 1.5
   tonemapper: {fileID: 4800000, guid: 003377fc2620a44939dadde6fe3f8190, type: 3}
-  validRenderTextureFormat: 0
+  validRenderTextureFormat: 1
 --- !u!114 &76840812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,7 +785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800082749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1232.1, y: -240.4, z: -835}
+  m_LocalPosition: {x: -1232.1, y: -426.4, z: -835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

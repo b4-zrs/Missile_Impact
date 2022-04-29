@@ -3,6 +3,26 @@ using System.Collections;
 
 public class MissileControl : MonoBehaviour
 {
+	public float missileSpeed;
+	private Vector3 playerPos;
+	private readonly float playerPosXClamp = 3.0f;
+	private readonly float playerPosYClamp = 3.0f;
+
+	
+	private void MovingRestrictions()
+	{
+		//変数に自分の今の位置を入れる
+		this.playerPos = transform.position;
+
+		//playerPos変数のxとyに制限した値を入れる
+		//playerPos.xという値を-playerPosXClamp～playerPosXClampの間に収める
+		this.playerPos.x = Mathf.Clamp(this.playerPos.x, -this.playerPosXClamp, this.playerPosXClamp);
+		this.playerPos.y = Mathf.Clamp(this.playerPos.y, -this.playerPosYClamp, this.playerPosYClamp);
+
+		transform.position = new Vector3(this.playerPos.x, this.playerPos.y, this.playerPos.z);
+	}
+	
+
 	// speedを制御する
 	public float speed = 10;
 	public float moveForceMultiplier;
@@ -30,6 +50,14 @@ public class MissileControl : MonoBehaviour
 		rigidbody.angularDrag = 15.0f;
 	}
 
+	void Update()
+	{
+		// 前進は自動
+		transform.Translate(0f, 0f, missileSpeed * Time.deltaTime);
+
+		this.MovingRestrictions();
+	}
+
 	void FixedUpdate()
 	{
 		float x = Input.GetAxis("Horizontal");
@@ -54,6 +82,8 @@ public class MissileControl : MonoBehaviour
 		// 機体にトルクを加える
 		rigidbody.AddTorque(rotationTorque + restoringTorque);
 	}
+
+
 }
 
 /*
@@ -88,5 +118,17 @@ void Update()
 	float noseTurn = -miuNoseInputValue * 60 * Time.deltaTime;
 	Quaternion turnNoseRotation = Quaternion.Euler(noseTurn, 0, 0);
 	miuRb.MoveRotation(miuRb.rotation * turnNoseRotation);
+
+ private Vector2 playerPos;
+    private readonly float playerPosXClamp = 3.0f;
+    private readonly float playerPosYClamp = 3.0f;
+
+    private void Update()
+    {
+        ////前進処理
+        transform.Translate(Vector3.up * this.moveSpeed * Time.deltaTime);
+        // 移動制限処理
+        this.MovingRestrictions();
+
 */
 

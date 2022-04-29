@@ -10,12 +10,12 @@ public class MoveCamera : MonoBehaviour
 
     void Start()
     {
-        distance = transform.position - target.transform.position;
+        distance.z = transform.position.z - target.transform.position.z;
     }
 
     void LateUpdate()
     {
-        transform.position = target.transform.position + distance;
+        transform.position = new Vector3(0, 0, target.transform.position.z + distance.z);
+
     }
 }
-
