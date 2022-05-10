@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class MissileControl : MonoBehaviour
 {
@@ -8,35 +8,33 @@ public class MissileControl : MonoBehaviour
 	private readonly float playerPosXClamp = 3.0f;
 	private readonly float playerPosYClamp = 3.0f;
 
-	
 	private void MovingRestrictions()
 	{
-		//•Ï”‚É©•ª‚Ì¡‚ÌˆÊ’u‚ğ“ü‚ê‚é
+		//ï¿½Ïï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ÌˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		this.playerPos = transform.position;
 
-		//playerPos•Ï”‚Ìx‚Æy‚É§ŒÀ‚µ‚½’l‚ğ“ü‚ê‚é
-		//playerPos.x‚Æ‚¢‚¤’l‚ğ-playerPosXClamp`playerPosXClamp‚ÌŠÔ‚Éû‚ß‚é
+		//playerPosï¿½Ïï¿½ï¿½ï¿½xï¿½ï¿½yï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//playerPos.xï¿½Æ‚ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½-playerPosXClampï¿½`playerPosXClampï¿½ÌŠÔ‚Éï¿½ï¿½ß‚ï¿½
 		this.playerPos.x = Mathf.Clamp(this.playerPos.x, -this.playerPosXClamp, this.playerPosXClamp);
 		this.playerPos.y = Mathf.Clamp(this.playerPos.y, -this.playerPosYClamp, this.playerPosYClamp);
 
 		transform.position = new Vector3(this.playerPos.x, this.playerPos.y, this.playerPos.z);
 	}
-	
 
-	// speed‚ğ§Œä‚·‚é
+	// speedï¿½ğ§Œä‚·ï¿½ï¿½
 	public float speed = 10;
 	public float moveForceMultiplier;
 
-	// …•½ˆÚ“®‚É‹@ñ‚ğ¶‰E‚ÉŒü‚¯‚éƒgƒ‹ƒN
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½É‹@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½N
 	public float yawTorqueMagnitude = 30.0f;
 
-	// ‚’¼ˆÚ“®‚É‹@ñ‚ğã‰º‚ÉŒü‚¯‚éƒgƒ‹ƒN
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½É‹@ï¿½ï¿½ï¿½ï¿½ã‰ºï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½N
 	public float pitchTorqueMagnitude = 60.0f;
 
-	// …•½ˆÚ“®‚É‹@‘Ì‚ğ¶‰E‚ÉŒX‚¯‚éƒgƒ‹ƒN
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½É‹@ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½Eï¿½ÉŒXï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½N
 	public float rollTorqueMagnitude = 30.0f;
 
-	// ƒoƒl‚Ì‚æ‚¤‚Ép¨‚ğŒ³‚É–ß‚·ƒgƒ‹ƒN
+	// ï¿½oï¿½lï¿½Ì‚æ‚¤ï¿½Épï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É–ß‚ï¿½ï¿½gï¿½ï¿½ï¿½N
 	public float restoringTorqueMagnitude = 100.0f;
 
 	private Vector3 Player_pos;
@@ -46,13 +44,13 @@ public class MissileControl : MonoBehaviour
 	{
 		rigidbody = GetComponent<Rigidbody>();
 
-		// ƒoƒl•œŒ³—Í‚Å‚ä‚ç‚ä‚ç—h‚ê‘±‚¯‚é‚Ì‚ğ–h‚®‚½‚ßAangularDrag‚ğ‘å‚«‚ß‚É‚µ‚Ä‚¨‚­
+		// ï¿½oï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Í‚Å‚ï¿½ï¿½ï¿½ï¿½hï¿½ê‘±ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ßAangularDragï¿½ï¿½å‚«ï¿½ß‚É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 		rigidbody.angularDrag = 15.0f;
 	}
 
 	void Update()
 	{
-		// ‘Oi‚Í©“®
+		// ï¿½Oï¿½iï¿½Íï¿½ï¿½ï¿½
 		transform.Translate(0f, 0f, missileSpeed * Time.deltaTime);
 
 		this.MovingRestrictions();
@@ -63,26 +61,30 @@ public class MissileControl : MonoBehaviour
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
 
-		// x‚Æy‚Éspeed‚ğŠ|‚¯‚é
+		// xï¿½ï¿½yï¿½ï¿½speedï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½
 		rigidbody.AddForce(x * speed, y * speed, 0);
 
 		Vector3 moveVector = Vector3.zero;
 
 		rigidbody.AddForce(moveForceMultiplier * (moveVector - rigidbody.velocity));
 
-		// ƒvƒŒƒCƒ„[‚Ì“ü—Í‚É‰‚¶‚Äp¨‚ğ‚Ğ‚Ë‚ë‚¤‚Æ‚·‚éƒgƒ‹ƒN
+		// ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì“ï¿½ï¿½Í‚É‰ï¿½ï¿½ï¿½ï¿½Äpï¿½ï¿½ï¿½ï¿½ï¿½Ğ‚Ë‚ë‚¤ï¿½Æ‚ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½N
 		Vector3 rotationTorque = new Vector3(-y * pitchTorqueMagnitude, x * yawTorqueMagnitude, -x * rollTorqueMagnitude);
 
-		// Œ»İ‚Ìp¨‚Ì‚¸‚ê‚É”ä—á‚µ‚½‘å‚«‚³‚Å‹t•ûŒü‚É‚Ğ‚Ë‚ë‚¤‚Æ‚·‚éƒgƒ‹ƒN
+		// ï¿½ï¿½ï¿½İ‚Ìpï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½É”ï¿½á‚µï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½Å‹tï¿½ï¿½ï¿½ï¿½ï¿½É‚Ğ‚Ë‚ë‚¤ï¿½Æ‚ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½N
 		Vector3 right = transform.right;
 		Vector3 up = transform.up;
 		Vector3 forward = transform.forward;
 		Vector3 restoringTorque = new Vector3(forward.y - up.z, right.z - forward.x, up.x - right.y) * restoringTorqueMagnitude;
 
-		// ‹@‘Ì‚Éƒgƒ‹ƒN‚ğ‰Á‚¦‚é
+		// ï¿½@ï¿½Ì‚Éƒgï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		rigidbody.AddTorque(rotationTorque + restoringTorque);
 	}
 
+	void OnCollisionEnter(Collision collision)
+	{
+		Time.timeScale = 0;
+	}
 
 }
 
@@ -104,16 +106,16 @@ void Start()
 // Update is called once per frame
 void Update()
 {
-	// ‘Oi‚Í©“®
+	// ï¿½Oï¿½iï¿½Íï¿½ï¿½ï¿½
 	transform.Translate(0f, 0f , missileSpeed * Time.deltaTime);
 
-	// ù‰ñ
+	// ï¿½ï¿½ï¿½ï¿½
 	miuTurnInputValue = Input.GetAxis("Horizontal");
 	float turn = miuTurnInputValue * 150 * Time.deltaTime;
 	Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
 	miuRb.MoveRotation(miuRb.rotation * turnRotation);
 
-	// ‹@ñiã¸A‰º~j
+	// ï¿½@ï¿½ï¿½iï¿½ã¸ï¿½Aï¿½ï¿½ï¿½~ï¿½j
 	miuNoseInputValue = Input.GetAxis("Vertical");
 	float noseTurn = -miuNoseInputValue * 60 * Time.deltaTime;
 	Quaternion turnNoseRotation = Quaternion.Euler(noseTurn, 0, 0);
@@ -125,10 +127,9 @@ void Update()
 
     private void Update()
     {
-        ////‘Oiˆ—
+        ////ï¿½Oï¿½iï¿½ï¿½ï¿½ï¿½
         transform.Translate(Vector3.up * this.moveSpeed * Time.deltaTime);
-        // ˆÚ“®§ŒÀˆ—
+        // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.MovingRestrictions();
 
 */
-
