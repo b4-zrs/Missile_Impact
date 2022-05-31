@@ -81,12 +81,46 @@ public class MissileControl : MonoBehaviour
 		rigidbody.AddTorque(rotationTorque + restoringTorque);
 	}
 
+	/*
 	void OnCollisionEnter(Collision collision)
 	{
+		//Destroy(this.gameObject);
+		Destroy(collision.gameObject);
 		Time.timeScale = 0;
 	}
+	*/
 
-}
+	//public class rocketPower : MonoBehaviour
+
+		Rigidbody rb;
+		public GameObject explode;//explodeにはunity上でprefabを関連付けます
+	    public GameObject fire;
+	    public GameObject smoke;
+	    void Start()
+		{
+			rb = this.GetComponent<Rigidbody>(); //衝突時にオブジェクトを消す際に使用
+		}
+	
+		void OnCollisionEnter(Collision collision) //衝突時の処理
+		{
+			//Destroy(this.gameObject);
+			if (collision.gameObject.tag == "Enemy")
+			//タグで限定（他のオブジェクトに衝突した場合は呼び出さない
+			{
+				rb.isKinematic = true; //位置を固定
+				this.transform.localScale = Vector3.zero; //みえない大きさにする
+				Instantiate(explode, this.transform.position, Quaternion.identity);
+			//ぶつかった位置にexplodeというprefabを配置する
+			
+			Destroy(fire);
+			Destroy(smoke);
+		}
+		
+		Time.timeScale = 0;
+
+		}
+	}
+
 
 /*
 private float miuTurnInputValue;
